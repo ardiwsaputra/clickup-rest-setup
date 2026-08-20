@@ -1,0 +1,13 @@
+# Copy to ~/.clickup_allow to restrict ClickUp work to these IDs only.
+# Without this file, every space and list in the workspace is fair game.
+#
+# One ID per line. Blank lines and # comments are ignored.
+# Add both the space and the lists inside it that you want reachable.
+#
+# Find your own IDs with:
+#   curl -fsS -H "Authorization: $(cat ~/.clickup_token)" \
+#     https://api.clickup.com/api/v2/team
+# then walk /team/{id}/space and /space/{id}/list.
+
+111111111111   # Example Space   <- replace with your own
+222222222222   # Example List    <- replace with your own
