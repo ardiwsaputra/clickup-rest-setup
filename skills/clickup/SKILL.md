@@ -107,6 +107,18 @@ a single call silently truncating at 100 is the most common bug here.
   usually from templates. Exact-string matching on a name will miss them. Match on
   `id`, or use a substring/normalized comparison.
 
+## Types the API lies about
+
+- A Custom Field declared `"type": "number"` returns its value as a **string**
+  (`"value": "2.5"`). Cast before doing arithmetic or you will concatenate.
+- In a time-entry object, `start` is an **int** and `end` is a **string**. Cast both.
+- `duration`, `time_spent`, and `time_estimate` are **milliseconds**. 1.5 hours is
+  `5400000`.
+- A task carries the aggregate `time_spent` but **no** `time_entries` key. For who
+  logged what and when, call `GET /v2/team/{team_id}/time_entries` separately.
+  Those entries embed each user's **email address** — don't dump them into shared
+  files without saying so.
+
 ## Rate limits
 
 **100 requests/minute per token** on Free / Unlimited / Business (1,000 on
